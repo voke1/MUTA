@@ -41,6 +41,7 @@ import Spinner from "react-native-loading-spinner-overlay";
 
 const SelectedLanguage = ({ navigation }) => {
   const [lang, setLang] = React.useState("");
+  const [langName, setLangName] = React.useState("");
   const { setLangToLearn, learnToLearn } = useContext(AuthContext);
   const { isSubmitting, getLanguages, languages } = useContext(AuthContext);
 
@@ -142,6 +143,7 @@ const SelectedLanguage = ({ navigation }) => {
             flexWrap: "wrap",
             flexDirection: "row",
             marginBottom: SIZES.base * 2,
+            justifyContent: "center"
           }}
         >
           {languages.map((item, index) => {
@@ -163,6 +165,7 @@ const SelectedLanguage = ({ navigation }) => {
                 }}
                 onPress={() => {
                   setLang(item.language_id);
+                  setLangName(item.languageName);
                 }}
               >
                 <Image
@@ -222,7 +225,7 @@ const SelectedLanguage = ({ navigation }) => {
             }}
             onPress={() => {
               setLangToLearn(lang);
-              navigation.navigate("proficiency");
+              navigation.navigate("proficiency", {name: langName});
             }}
           />
         )}

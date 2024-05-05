@@ -31,7 +31,7 @@ import {
 } from "../../components";
 import { AuthContext } from "../../contexts/auth/state";
 
-const ProficiencyScreen = ({ navigation }) => {
+const ProficiencyScreen = ({ navigation, route }) => {
   const { width, height } = Dimensions.get("window");
   const [prof, setProf] = React.useState("");
   const { proficiency, setProficiency } = useContext(AuthContext);
@@ -95,7 +95,7 @@ const ProficiencyScreen = ({ navigation }) => {
           marginBottom: SIZES.padding * 3,
         }}
       >
-        How would you rate your proficiency in the Language?
+       {`How would you rate your proficiency in ${route.params.name}?`}
       </Text>
 
       <View
