@@ -21,10 +21,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1B1E26"
-      }
+      },
+      "package": "com.voke1.muta"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "05744789-5e1c-40bd-840e-24a55a266d74"
+      }
+    },
+    "owner": "voke1"
   }
 }
