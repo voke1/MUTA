@@ -115,7 +115,6 @@ const ProficiencyScreen = ({ navigation }) => {
                   fontSize: 16,
                   lineHeight: 21,
                   // textAlign: "center",
-                  fontSize: SIZES.h3,
                   color: COLORS.white,
                   fontWeight: "bold",
                 }}

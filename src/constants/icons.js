@@ -1,5 +1,5 @@
 const backBtn = require("../assets/icons/ArrowLeft.png");
-const checkBtn = require("../assets/icons/Check.png");
+const checkBtn = require("../assets/icons/checkBtn.png");
 const englishFlag = require("../assets/icons/English.png");
 const spanishFlag = require("../assets/icons/Spanish.png");
 const portugueseFlag = require("../assets/icons/Portuguese.png");
@@ -38,8 +38,10 @@ const notification = require("../assets/icons/notification.png");
 const level = require("../assets/icons/level.png");
 const lesson = require("../assets/icons/lesson.png");
 const book = require("../assets/icons/book.png");
+const play = require("../assets/icons/play.png");
 
 export default {
+  play,
   lessonIcon,
   lesson,
   carat,

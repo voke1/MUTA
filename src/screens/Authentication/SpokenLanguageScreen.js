@@ -92,7 +92,6 @@ const SpokenLanguageScreen = ({ navigation }) => {
                 fontSize: 16,
                 lineHeight: 21,
                 // textAlign: "center",
-                fontSize: SIZES.h3,
                 color: COLORS.white,
                 fontWeight: "bold",
               }}
@@ -102,7 +101,7 @@ const SpokenLanguageScreen = ({ navigation }) => {
                 justifyContent: "center",
               }}
               containerStyle={{
-                height: 70,
+                height: SIZES.padding* 3,
                 // backgroundColor: COLORS.lightPrimary,
                 justifyContent: "center",
                 alignItems: "center",

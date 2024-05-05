@@ -143,12 +143,12 @@ const HomeScreen = ({ navigation }) => {
               height: SIZES.height * 0.23,
               // marginTop: SIZES.base,
               borderRadius: SIZES.padding,
-              justifyContent: "center",
+              justifyContent: "space-between",
               alignItems: "center",
               flexDirection: "row",
             }}
           >
-            <View style={{ flex: 2, paddingLeft: SIZES.padding }}>
+            <View style={{ flex: 2, paddingLeft: SIZES.padding, }}>
               <TextIconLabel
                 label="Intermediate"
                 iconPosition="LEFT"
@@ -234,7 +234,7 @@ const HomeScreen = ({ navigation }) => {
               <TextIconButton
                 label="Start learning"
                 iconPosition="RIGHT"
-                icon={icons.google}
+                icon={icons.play}
                 containerStyle={{
                   alignItems: "center",
                   borderRadius: SIZES.padding,
@@ -263,10 +263,11 @@ const HomeScreen = ({ navigation }) => {
             <View style={{ flex: 1 }}>
               <Image
                 source={icons.lessonIcon}
-                resizeMode="contain"
+                // resizeMode="contain"
                 style={{
-                  width: SIZES.padding * 8,
+                  width: SIZES.padding * 4,
                   height: SIZES.padding * 6,
+                  alignSelf: "flex-end"
                 }}
               />
             </View>
@@ -371,7 +372,6 @@ const HomeScreen = ({ navigation }) => {
                   fontSize: 16,
                   lineHeight: 21,
                   // textAlign: "center",
-                  fontSize: SIZES.h3,
                   color: item.title === "Me" ? COLORS.primary : COLORS.white,
                   fontWeight: "bold",
                 }}

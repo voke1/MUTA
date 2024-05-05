@@ -35,6 +35,7 @@ const WelcomeScreen = ({ navigation }) => {
   const { width, height } = Dimensions.get("window");
 
   return (
+    
     <ImageBackground
       source={icons.welcome}
       style={{
