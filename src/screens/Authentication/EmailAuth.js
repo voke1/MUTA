@@ -139,7 +139,6 @@ const EmailAuth = ({ navigation, route }) => {
             }}
             value={email}
             editable={false}
-            keyboardType="name"
             autoCompleteType="name"
             placeholder={""}
             containerStyle={{
@@ -170,7 +169,6 @@ const EmailAuth = ({ navigation, route }) => {
             editable={true}
             value={Fname}
             label="First name"
-            keyboardType="name"
             autoCompleteType="name"
             onChange={(value) => {
               //validate email
@@ -205,7 +203,6 @@ const EmailAuth = ({ navigation, route }) => {
             }}
             //   label="Email"
             editable={true}
-            keyboardType="name"
             autoCompleteType="name"
             onChange={(value) => {
               //validate email
@@ -247,7 +244,6 @@ const EmailAuth = ({ navigation, route }) => {
               setPassword(value);
             }}
             value={password}
-            keyboardType="name"
             autoCompleteType="name"
             placeholder={""}
             containerStyle={{

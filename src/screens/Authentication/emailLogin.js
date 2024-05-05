@@ -136,7 +136,6 @@ const EmailLoginScreen = ({ navigation, route }) => {
             }}
             value={email}
             editable={false}
-            keyboardType="name"
             autoCompleteType="name"
             placeholder={""}
             containerStyle={{
@@ -171,7 +170,6 @@ const EmailLoginScreen = ({ navigation, route }) => {
               setPassword(value);
             }}
             value={password}
-            keyboardType="name"
             autoCompleteType="name"
             placeholder={""}
             containerStyle={{
