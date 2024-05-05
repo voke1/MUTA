@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Alert,
   BackHandler,
@@ -19,10 +19,11 @@ import {
   FormInput,
 } from "../../components";
 import { COLORS, icons, images, SIZES } from "../../constants";
-
+import { AuthContext } from "../../contexts/auth/state";
 const LoginScreen = ({ navigation }) => {
   const { width, height } = Dimensions.get("window");
   const [email, setEmail] = useState("");
+  const {login} = useContext(AuthContext)
 
   function renderHeader() {
     return (
@@ -59,7 +60,7 @@ const LoginScreen = ({ navigation }) => {
     );
   }
 
-  const renderSignupScreen = () => {
+  const renderLogin = () => {
     return (
       <View
         style={{
@@ -225,14 +226,14 @@ const LoginScreen = ({ navigation }) => {
         <TextButton
           // label={label}
           label={"LOG IN WITH EMAIL"}
-          disabled={false}
+          isDisabled={!email}
           buttonContainerStyle={{
             height: SIZES.radius * 2.4,
             alignItems: "center",
             alignSelf: "flex-end",
             // marginTop: 12,
             borderRadius: SIZES.base * 1.2,
-            backgroundColor: COLORS.secondary,
+            backgroundColor: email ? COLORS.secondary : `rgba(76, 166, 168, .4)`,
             // marginHorizontal: 40,
             // marginVertical: SIZES.base,
             width: "100%",
@@ -298,7 +299,7 @@ const LoginScreen = ({ navigation }) => {
       {
         <>
           {renderHeader()}
-          {renderSignupScreen()}
+          {renderLogin()}
         </>
       }
     </SafeAreaView>

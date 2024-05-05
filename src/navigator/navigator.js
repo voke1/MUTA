@@ -20,6 +20,8 @@ import {
   LoginScreen,
   EmailLoginScreen,
 } from "../screens";
+import { AuthContext } from "../contexts/auth/state";
+import setAuthToken from "../contexts/auth/setAuthToken";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -203,6 +205,10 @@ const BottomTabNavigator = () => {
 };
 
 const GeneralStackNavigation = () => {
+  const { token } = useContext(AuthContext);
+
+  // intercept and attach token to all axios request
+  setAuthToken(token);
   return (
     <>
       <StatusBar />

@@ -1,23 +1,4 @@
-// import { StatusBar } from 'expo-status-bar';
-// import { StyleSheet, Text, View } from 'react-native';
 
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Open up App.js to start working on your app!</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
 
 // Dependencies
 import React, { useCallback, useEffect, useState } from "react";
@@ -33,7 +14,7 @@ import {
 } from "@expo-google-fonts/raleway";
 import Navigation from "./src/navigator/navigator";
 import { NavigationContainer } from "@react-navigation/native";
-
+import { AuthState } from "./src/contexts/auth/state";
 
 // State
 // import { AuthState } from "./src/general/contexts/auth/state";
@@ -61,10 +42,9 @@ const App = () => {
 
         //set Timeout of 2 minutes
 
-        
-       setTimeout(() => {
-         setAppIsReady(true);
-       }, 5000);
+        setTimeout(() => {
+          setAppIsReady(true);
+        }, 5000);
       }
     };
 
@@ -90,11 +70,11 @@ const App = () => {
       style={{ flex: 1, backgroundColor: "#E4B511" }}
       onLayout={onLayoutRootView}
     >
-      {/* <AuthState> */}
+      <AuthState>
       <NavigationContainer>
         <Navigation />
       </NavigationContainer>
-      {/* </AuthState> */}
+      </AuthState>
     </SafeAreaProvider>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Text,
@@ -20,17 +20,17 @@ import {
   Header,
   IconButton,
 } from "../../components";
+import { AuthContext } from "../../contexts/auth/state";
 
 const EmailLoginScreen = ({ navigation }) => {
   const { width, height } = Dimensions.get("window");
+  const { login } = useContext(AuthContext);
 
-  const [Fname, SetFname] = useState("");
-  const [Lname, SetLname] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
   function checkEnabled() {
-    if (Fname && Lname) {
+    if (email && password) {
       return false;
     }
     return true;
@@ -206,7 +206,7 @@ const EmailLoginScreen = ({ navigation }) => {
               lineHeight: 24,
               fontFamily: "Poppins-Medium",
               fontWeight: "bold",
-              marginBottom: SIZES.padding* 5
+              marginBottom: SIZES.padding * 5,
             }}
           >
             Forgot your password?
@@ -214,14 +214,17 @@ const EmailLoginScreen = ({ navigation }) => {
 
           <TextButton
             // label={label}
+            isDisabled={!(email && password)}
             label={"LOGIN"}
-            disabled={false}
             buttonContainerStyle={{
               height: SIZES.radius * 2.4,
               alignItems: "center",
               // marginTop: 12,
               borderRadius: SIZES.base * 1.2,
-              backgroundColor: COLORS.secondary,
+              backgroundColor:( email && password)
+                ? COLORS.secondary
+                : `rgba(76, 166, 168, .4)`,
+
               // marginHorizontal: 40,
               // marginVertical: SIZES.base,
               width: "100%",
@@ -235,7 +238,7 @@ const EmailLoginScreen = ({ navigation }) => {
               fontFamily: "Poppins-Regular",
               fontWeight: "bold",
             }}
-            onPress={() => navigation.navigate("bottomTabs")}
+            onPress={() => login({ email, password })}
           />
 
           <View
