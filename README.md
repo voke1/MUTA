@@ -12,7 +12,7 @@
 2. User can signup.
 3. User can login.
 4. User can view dashboard
-5. Admin can selected Language
+5. User can selected Language
 
 
 ## Technologies utilised
