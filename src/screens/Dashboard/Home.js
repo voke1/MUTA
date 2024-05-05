@@ -128,9 +128,9 @@ const HomeScreen = ({ navigation }) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{
-          marginHorizontal: SIZES.base * 1.2,
+          marginHorizontal: SIZES.base * 1.5,
           flex: 1,
-          marginBottom: SIZES.padding * 5,
+          marginBottom: SIZES.padding * 2,
         }}
       >
         {renderHeader()}

@@ -246,16 +246,17 @@ const LoginScreen = ({ navigation }) => {
         <TextButton
           // label={label}
           label={"LOG IN WITH EMAIL"}
-          isDisabled={emailError}
+          isDisabled={!email || emailError}
           buttonContainerStyle={{
             height: SIZES.radius * 2.4,
             alignItems: "center",
             alignSelf: "flex-end",
             // marginTop: 12,
             borderRadius: SIZES.base * 1.2,
-            backgroundColor: !emailError
+            backgroundColor: email
               ? COLORS.secondary
               : `rgba(76, 166, 168, .4)`,
+
             // marginHorizontal: 40,
             // marginVertical: SIZES.base,
             width: "100%",
@@ -269,7 +270,11 @@ const LoginScreen = ({ navigation }) => {
 
             fontWeight: "bold",
           }}
-          onPress={() => navigation.navigate("emailLogin", { email })}
+          onPress={() => {
+            if (!emailError && email) {
+              navigation.navigate("emailLogin", { email });
+            }
+          }}
         />
 
         <View
