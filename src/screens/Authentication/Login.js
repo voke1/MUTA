@@ -43,7 +43,6 @@ const LoginScreen = ({ navigation }) => {
         titleStyle={{
           fontSize: 18,
           lineHeight: 27,
-          fontFamily: "Poppins-Bold",
         }}
         rightComponent={<View style={{ width: 40, height: 40 }}></View>}
         leftComponent={
@@ -81,7 +80,7 @@ const LoginScreen = ({ navigation }) => {
             color: COLORS.white,
             fontSize: 25,
             lineHeight: 40,
-            fontFamily: "Poppins-Bold",
+
             textAlign: "center",
             fontWeight: "bold",
           }}
@@ -104,7 +103,7 @@ const LoginScreen = ({ navigation }) => {
             color: COLORS.primary,
             fontSize: 14,
             lineHeight: 21,
-            fontFamily: "Poppins-Regular",
+
             paddingLeft: SIZES.base,
             fontWeight: "bold",
           }}
@@ -131,7 +130,7 @@ const LoginScreen = ({ navigation }) => {
             color: COLORS.primary,
             fontSize: 14,
             lineHeight: 21,
-            fontFamily: "Poppins-Regular",
+
             paddingLeft: SIZES.base,
             fontWeight: "bold",
           }}
@@ -162,7 +161,7 @@ const LoginScreen = ({ navigation }) => {
             style={{
               fontSize: 12,
               lineHeight: 18,
-              fontFamily: "Poppins-Medium",
+
               fontWeight: "bold",
               color: COLORS.lightGray,
             }}
@@ -179,7 +178,6 @@ const LoginScreen = ({ navigation }) => {
         </View>
         <FormInput
           inputStyle={{
-            fontFamily: "Poppins-Regular",
             // fontStyle: "normal",
             // fontWeight: "700",
             fontSize: 14,
@@ -197,7 +195,6 @@ const LoginScreen = ({ navigation }) => {
             }
           }}
           value={email}
-          keyboardType="name"
           autoCompleteType="name"
           placeholder={"Enter email address"}
           containerStyle={{
@@ -256,7 +253,7 @@ const LoginScreen = ({ navigation }) => {
             alignSelf: "flex-end",
             // marginTop: 12,
             borderRadius: SIZES.base * 1.2,
-            backgroundColor: email
+            backgroundColor: !emailError
               ? COLORS.secondary
               : `rgba(76, 166, 168, .4)`,
             // marginHorizontal: 40,
@@ -269,7 +266,7 @@ const LoginScreen = ({ navigation }) => {
             color: COLORS.primary,
             fontSize: 14,
             lineHeight: 21,
-            fontFamily: "Poppins-Regular",
+
             fontWeight: "bold",
           }}
           onPress={() => navigation.navigate("emailLogin", { email })}
@@ -287,7 +284,7 @@ const LoginScreen = ({ navigation }) => {
               color: COLORS.lightGray,
               fontSize: 12,
               lineHeight: 24,
-              fontFamily: "Poppins-Medium",
+
               fontWeight: "bold",
             }}
           >
@@ -302,7 +299,7 @@ const LoginScreen = ({ navigation }) => {
               color: COLORS.secondary,
               fontSize: 12,
               lineHeight: 24,
-              fontFamily: "Poppins-Medium",
+
               fontWeight: "bold",
             }}
             onPress={() => {

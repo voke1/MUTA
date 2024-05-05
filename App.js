@@ -44,7 +44,7 @@ const App = () => {
 
         setTimeout(() => {
           setAppIsReady(true);
-        }, 5000);
+        }, 1000);
       }
     };
 

@@ -52,7 +52,6 @@ const HomeScreen = ({ navigation }) => {
         titleStyle={{
           fontSize: 18,
           lineHeight: 27,
-          fontFamily: "Poppins-Bold",
         }}
         rightComponent={
           <View style={{ flexDirection: "row" }}>
@@ -100,7 +99,7 @@ const HomeScreen = ({ navigation }) => {
               color: COLORS.white,
               fontSize: 14,
               lineHeight: 21,
-              fontFamily: "Poppins-Regular",
+
               paddingRight: SIZES.base,
               fontWeight: "bold",
             }}
@@ -148,7 +147,7 @@ const HomeScreen = ({ navigation }) => {
               flexDirection: "row",
             }}
           >
-            <View style={{ flex: 2, paddingLeft: SIZES.padding, }}>
+            <View style={{ flex: 2, paddingLeft: SIZES.padding }}>
               <TextIconLabel
                 label="Intermediate"
                 iconPosition="LEFT"
@@ -162,7 +161,7 @@ const HomeScreen = ({ navigation }) => {
                   color: COLORS.lightGray,
                   fontSize: 14,
                   lineHeight: 21,
-                  fontFamily: "Poppins-Regular",
+
                   fontWeight: "bold",
                 }}
                 iconStyle={{
@@ -185,7 +184,7 @@ const HomeScreen = ({ navigation }) => {
                   color: COLORS.lightGray,
                   fontSize: 14,
                   lineHeight: 21,
-                  fontFamily: "Poppins-Regular",
+
                   fontWeight: "bold",
                 }}
                 iconStyle={{
@@ -220,7 +219,7 @@ const HomeScreen = ({ navigation }) => {
                 <Text
                   style={{
                     color: "white",
-                    fontFamily: "Poppins-Bold",
+
                     fontSize: 14,
                     lineHeight: 21,
                     fontWeight: "bold",
@@ -248,7 +247,7 @@ const HomeScreen = ({ navigation }) => {
                   color: COLORS.primary,
                   fontSize: 14,
                   lineHeight: 21,
-                  fontFamily: "Poppins-Regular",
+
                   paddingLeft: SIZES.base,
                   fontWeight: "bold",
                 }}
@@ -267,7 +266,7 @@ const HomeScreen = ({ navigation }) => {
                 style={{
                   width: SIZES.padding * 4,
                   height: SIZES.padding * 6,
-                  alignSelf: "flex-end"
+                  alignSelf: "flex-end",
                 }}
               />
             </View>
@@ -276,7 +275,6 @@ const HomeScreen = ({ navigation }) => {
           <CardItem
             title={`Review your most recent lesson`}
             titleStyle={{
-              fontFamily: "Poppins-Medium",
               fontSize: 16,
               lineHeight: 21,
               color: COLORS.primary,
@@ -285,7 +283,6 @@ const HomeScreen = ({ navigation }) => {
             title2Style={{
               color: COLORS.lightGray,
               fontSize: 12,
-              fontFamily: "Poppins-Medium",
             }}
             titleContainerStyle={{
               alignItems: "flex-start",
@@ -350,7 +347,7 @@ const HomeScreen = ({ navigation }) => {
               color: COLORS.white,
               fontSize: 14,
               lineHeight: 21,
-              fontFamily: "Poppins-Regular",
+
               fontWeight: "bold",
             }}
             iconStyle={{
@@ -364,11 +361,11 @@ const HomeScreen = ({ navigation }) => {
           {dummyData.leaderBoard.map((item, index) => {
             return (
               <LeaderBoardItem
+                key={item.id} // Use a unique identifier (e.g., item.id) as the key
                 position={item.position}
                 title={item.title}
                 title2={item.subTitle}
                 titleStyle={{
-                  fontFamily: "Poppins-Medium",
                   fontSize: 16,
                   lineHeight: 21,
                   // textAlign: "center",
@@ -378,7 +375,6 @@ const HomeScreen = ({ navigation }) => {
                 title2Style={{
                   color: COLORS.lightGray,
                   fontSize: 12,
-                  fontFamily: "Poppins-Medium",
                 }}
                 titleContainerStyle={{
                   alignItems: "flex-start",
@@ -466,7 +462,7 @@ const HomeScreen = ({ navigation }) => {
             color: COLORS.primary,
             fontSize: 14,
             lineHeight: 21,
-            fontFamily: "Poppins-Regular",
+
             paddingLeft: SIZES.base,
             fontWeight: "bold",
           }}

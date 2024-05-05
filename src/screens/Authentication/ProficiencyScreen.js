@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -34,7 +34,7 @@ import { AuthContext } from "../../contexts/auth/state";
 const ProficiencyScreen = ({ navigation }) => {
   const { width, height } = Dimensions.get("window");
   const [prof, setProf] = React.useState("");
-const {proficiency, setProficiency} = useContext(AuthContext)
+  const { proficiency, setProficiency } = useContext(AuthContext);
   function renderHeader() {
     return (
       <Header
@@ -47,7 +47,6 @@ const {proficiency, setProficiency} = useContext(AuthContext)
         titleStyle={{
           fontSize: 18,
           lineHeight: 27,
-          fontFamily: "Poppins-Bold",
         }}
         rightComponent={<View style={{ width: 40, height: 40 }}></View>}
         leftComponent={
@@ -86,7 +85,7 @@ const {proficiency, setProficiency} = useContext(AuthContext)
         style={{
           // fontWeight: "bold",
           fontSize: 20,
-          fontFamily: "Poppins-Bold",
+
           // textAlign: "center",
           // paddingTop: SIZES.padding,
           color: COLORS.white,
@@ -109,10 +108,10 @@ const {proficiency, setProficiency} = useContext(AuthContext)
           {dummyData.proficiencies.map((item, index) => {
             return (
               <CardItem
+                key={item.id} // Use a unique identifier (e.g., item.id) as the key
                 title={item.title}
                 title2={item.subTitle}
                 titleStyle={{
-                  fontFamily: "Poppins-Medium",
                   fontSize: 16,
                   lineHeight: 21,
                   // textAlign: "center",
@@ -122,7 +121,6 @@ const {proficiency, setProficiency} = useContext(AuthContext)
                 title2Style={{
                   color: COLORS.lightGray,
                   fontSize: 12,
-                  fontFamily: "Poppins-Medium",
                 }}
                 titleContainerStyle={{
                   alignItems: "flex-start",
@@ -203,7 +201,7 @@ const {proficiency, setProficiency} = useContext(AuthContext)
             color: COLORS.primary,
             fontSize: 14,
             lineHeight: 21,
-            fontFamily: "Poppins-Regular",
+
             fontWeight: "bold",
           }}
           onPress={() => {
