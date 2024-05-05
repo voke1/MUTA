@@ -20,10 +20,13 @@ import {
 } from "../../components";
 import { COLORS, icons, images, SIZES } from "../../constants";
 
+
+
 const Signup = ({ navigation }) => {
   const { width, height } = Dimensions.get("window");
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
+  const [email, setEmail] = useState(null);
+  const [emailError, setEmailError] = useState(null);
+
 
   const validateEmail = (input) => {
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -186,9 +189,9 @@ const Signup = ({ navigation }) => {
           autoCompleteType="name"
           onChange={(value) => {
             //validate email
-            setEmail(value);
             if (validateEmail(value)) {
-              setEmailError(""); // Clear error message if email is valid
+              setEmail(value);
+              setEmailError(null); // Clear error message if email is valid
             } else {
               setEmailError("Please enter a valid email address");
             }
@@ -200,7 +203,7 @@ const Signup = ({ navigation }) => {
             height: SIZES.radius * 2.4,
             justifyContent: "center",
             alignItems: "center",
-            marginBottom: emailError ? null : SIZES.padding,
+            marginBottom: emailError ? 1 : SIZES.padding,
           }}
           inputContainerStyle={{
             backgroundColor: COLORS.primary,
@@ -210,7 +213,7 @@ const Signup = ({ navigation }) => {
             //   borderRadius: SIZES.radius * 3,
           }}
         />
-        {emailError ? (
+        {emailError && (
           <Text
             style={{
               color: "red",
@@ -221,7 +224,7 @@ const Signup = ({ navigation }) => {
           >
             {emailError}
           </Text>
-        ) : null}
+        )}
 
         <TextButton
           // label={label}

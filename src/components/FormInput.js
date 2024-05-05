@@ -15,7 +15,7 @@ const FormInput = ({
   secureTextEntry,
   keyboardType = "default",
   autoCompleteType = "off",
-  autoCapitalize = "None",
+  autoCapitalize = "none",
   errorMsg = "",
   maxLength,
   labelStyle,

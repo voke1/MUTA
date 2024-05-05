@@ -20,15 +20,17 @@ import {
 } from "../../components";
 import { COLORS, icons, images, SIZES } from "../../constants";
 import { AuthContext } from "../../contexts/auth/state";
+
 const LoginScreen = ({ navigation }) => {
   const { width, height } = Dimensions.get("window");
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
+  const [email, setEmail] = useState(null);
+  const [emailError, setEmailError] = useState(null);
 
   const validateEmail = (input) => {
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return pattern.test(input);
   };
+
   function renderHeader() {
     return (
       <Header
@@ -185,15 +187,16 @@ const LoginScreen = ({ navigation }) => {
           editable={true}
           onChange={(value) => {
             //validate email
-            setEmail(value);
+
             if (validateEmail(value)) {
-              setEmailError(""); // Clear error message if email is valid
+              setEmail(value);
+              setEmailError(null); // Clear error message if email is valid
             } else {
               setEmailError("Please enter a valid email address");
             }
           }}
           value={email}
-          autoCompleteType="name"
+          autoCompleteType="email"
           placeholder={"Enter email address"}
           containerStyle={{
             borderBottomWidth: 1,
@@ -239,7 +242,7 @@ const LoginScreen = ({ navigation }) => {
           >
             {emailError}
           </Text>
-        ) }
+        )}
 
         <TextButton
           // label={label}
