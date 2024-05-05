@@ -41,10 +41,13 @@ import Spinner from "react-native-loading-spinner-overlay";
 
 const SelectedLanguage = ({ navigation }) => {
   const [lang, setLang] = React.useState("");
+  const [langName, setLangName] = React.useState("");
   const { setLangToLearn, learnToLearn } = useContext(AuthContext);
   const { isSubmitting, getLanguages, languages } = useContext(AuthContext);
 
-  useEffect(() => getLanguages(), []);
+  useEffect(() => {
+    getLanguages();
+  }, []);
 
   function renderHeader() {
     return (
@@ -57,7 +60,6 @@ const SelectedLanguage = ({ navigation }) => {
         titleStyle={{
           fontSize: 18,
           lineHeight: 27,
-          fontFamily: "Poppins-Bold",
         }}
         rightComponent={<View style={{ width: 40, height: 40 }}></View>}
         leftComponent={
@@ -105,7 +107,7 @@ const SelectedLanguage = ({ navigation }) => {
         style={{
           // fontWeight: "bold",
           fontSize: 20,
-          fontFamily: "Poppins-Bold",
+
           lineHeight: 40,
           // textAlign: "center",
           // paddingTop: SIZES.padding,
@@ -141,6 +143,7 @@ const SelectedLanguage = ({ navigation }) => {
             flexWrap: "wrap",
             flexDirection: "row",
             marginBottom: SIZES.base * 2,
+            justifyContent: "center"
           }}
         >
           {languages.map((item, index) => {
@@ -162,6 +165,7 @@ const SelectedLanguage = ({ navigation }) => {
                 }}
                 onPress={() => {
                   setLang(item.language_id);
+                  setLangName(item.languageName);
                 }}
               >
                 <Image
@@ -216,12 +220,12 @@ const SelectedLanguage = ({ navigation }) => {
               color: COLORS.primary,
               fontSize: 14,
               lineHeight: 21,
-              fontFamily: "Poppins-Regular",
+
               fontWeight: "bold",
             }}
             onPress={() => {
               setLangToLearn(lang);
-              navigation.navigate("proficiency");
+              navigation.navigate("proficiency", {name: langName});
             }}
           />
         )}
@@ -232,7 +236,6 @@ const SelectedLanguage = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   giftTitle: {
-    fontFamily: "Poppins-Medium",
     fontSize: 16,
     lineHeight: 24,
     textAlign: "center",
@@ -247,7 +250,6 @@ const styles = StyleSheet.create({
     color: "#959595",
   },
   priceValue: {
-    fontFamily: "Poppins-Bold",
     fontSize: 12,
     lineHeight: 18,
     color: COLORS.primary,
@@ -274,7 +276,6 @@ const styles = StyleSheet.create({
     // marginRight: SIZES.base*2,
   },
   dropdown1BtnTxtStyle: {
-    fontFamily: "Poppins-Regular",
     fontSize: 14,
     lineHeight: 21,
     textAlign: "left",

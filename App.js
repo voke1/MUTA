@@ -44,7 +44,7 @@ const App = () => {
 
         setTimeout(() => {
           setAppIsReady(true);
-        }, 5000);
+        }, 1000);
       }
     };
 
@@ -67,7 +67,7 @@ const App = () => {
 
   return (
     <SafeAreaProvider
-      style={{ flex: 1, backgroundColor: "#E4B511" }}
+      style={{ flex: 1 }}
       onLayout={onLayoutRootView}
     >
       <AuthState>

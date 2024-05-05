@@ -78,11 +78,11 @@ const BottomTabNavigator = () => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === "Home") {
+          if (route.name == "Home") {
             iconName = focused ? icons.home : icons.home;
-          } else if (route.name === "Learn") {
+          } else if (route.name == "Learn") {
             iconName = focused ? icons.learn : icons.learn;
-          } else if (route.name === "Live Session") {
+          } else if (route.name == "Live Session") {
             iconName = focused ? icons.liveSession : icons.liveSession;
           }
 

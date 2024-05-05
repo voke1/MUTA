@@ -53,7 +53,6 @@ const EmailAuth = ({ navigation, route }) => {
         titleStyle={{
           fontSize: 18,
           lineHeight: 27,
-          fontFamily: "Poppins-Bold",
         }}
         rightComponent={<View style={{ width: 40, height: 40 }}></View>}
         leftComponent={
@@ -115,7 +114,6 @@ const EmailAuth = ({ navigation, route }) => {
               color: COLORS.white,
               fontSize: 25,
               lineHeight: 40,
-              fontFamily: "Poppins-Bold",
               textAlign: "center",
               fontWeight: "bold",
               marginBottom: SIZES.padding * 2,
@@ -129,7 +127,6 @@ const EmailAuth = ({ navigation, route }) => {
           </Text>
           <FormInput
             inputStyle={{
-              fontFamily: "Poppins-Regular",
               // fontStyle: "normal",
               // fontWeight: "700",
               fontSize: 14,
@@ -142,7 +139,6 @@ const EmailAuth = ({ navigation, route }) => {
             }}
             value={email}
             editable={false}
-            keyboardType="name"
             autoCompleteType="name"
             placeholder={""}
             containerStyle={{
@@ -164,7 +160,6 @@ const EmailAuth = ({ navigation, route }) => {
           </Text>
           <FormInput
             inputStyle={{
-              fontFamily: "Poppins-Regular",
               // fontStyle: "normal",
               // fontWeight: "700",
               fontSize: 14,
@@ -174,7 +169,6 @@ const EmailAuth = ({ navigation, route }) => {
             editable={true}
             value={Fname}
             label="First name"
-            keyboardType="name"
             autoCompleteType="name"
             onChange={(value) => {
               //validate email
@@ -202,7 +196,6 @@ const EmailAuth = ({ navigation, route }) => {
           </Text>
           <FormInput
             inputStyle={{
-              fontFamily: "Poppins-Regular",
               // fontStyle: "normal",
               // fontWeight: "700",
               fontSize: 14,
@@ -210,7 +203,6 @@ const EmailAuth = ({ navigation, route }) => {
             }}
             //   label="Email"
             editable={true}
-            keyboardType="name"
             autoCompleteType="name"
             onChange={(value) => {
               //validate email
@@ -240,7 +232,6 @@ const EmailAuth = ({ navigation, route }) => {
           </Text>
           <FormInput
             inputStyle={{
-              fontFamily: "Poppins-Regular",
               // fontStyle: "normal",
               // fontWeight: "700",
               fontSize: 14,
@@ -253,7 +244,6 @@ const EmailAuth = ({ navigation, route }) => {
               setPassword(value);
             }}
             value={password}
-            keyboardType="name"
             autoCompleteType="name"
             placeholder={""}
             containerStyle={{
@@ -316,7 +306,7 @@ const EmailAuth = ({ navigation, route }) => {
             color: COLORS.primary,
             fontSize: 14,
             lineHeight: 21,
-            fontFamily: "Poppins-Regular",
+
             fontWeight: "bold",
           }}
           onPress={() => {
@@ -343,7 +333,7 @@ const EmailAuth = ({ navigation, route }) => {
               color: COLORS.lightGray,
               fontSize: 12,
               lineHeight: 24,
-              fontFamily: "Poppins-Medium",
+
               fontWeight: "bold",
             }}
           >
@@ -358,7 +348,7 @@ const EmailAuth = ({ navigation, route }) => {
               color: COLORS.secondary,
               fontSize: 12,
               lineHeight: 24,
-              fontFamily: "Poppins-Medium",
+
               fontWeight: "bold",
             }}
             onPress={() => {

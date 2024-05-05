@@ -35,7 +35,6 @@ const WelcomeScreen = ({ navigation }) => {
   const { width, height } = Dimensions.get("window");
 
   return (
-
     <ImageBackground
       source={icons.welcome}
       style={{
@@ -52,7 +51,6 @@ const WelcomeScreen = ({ navigation }) => {
             color: COLORS.lightGray,
             fontSize: 16,
             lineHeight: 24,
-            fontFamily: "Poppins-Medium",
           }}
         >
           Learn Languages from
@@ -71,7 +69,7 @@ const WelcomeScreen = ({ navigation }) => {
             color: COLORS.lightGray,
             fontSize: 16,
             lineHeight: 24,
-            fontFamily: "Poppins-Medium",
+
             marginBottom: SIZES.padding * 3,
           }}
         >
@@ -97,7 +95,7 @@ const WelcomeScreen = ({ navigation }) => {
             color: COLORS.primary,
             fontSize: 14,
             lineHeight: 21,
-            fontFamily: "Poppins-Regular",
+
             fontWeight: "bold",
           }}
           onPress={() => navigation.navigate("spokenLanguage")}
@@ -124,7 +122,7 @@ const WelcomeScreen = ({ navigation }) => {
             color: COLORS.secondary,
             fontSize: 14,
             lineHeight: 21,
-            fontFamily: "Poppins-Regular",
+
             fontWeight: "bold",
           }}
           onPress={() => navigation.navigate("login")}
@@ -140,7 +138,7 @@ const WelcomeScreen = ({ navigation }) => {
             style={{
               color: COLORS.lightGray,
               fontSize: 13,
-              fontFamily: "Poppins-Medium",
+
               textAlign: "center",
             }}
           >
@@ -149,7 +147,6 @@ const WelcomeScreen = ({ navigation }) => {
               style={{
                 color: COLORS.secondary,
                 fontSize: 13,
-                fontFamily: "Poppins-Medium",
               }}
             >
               Terms of Service
@@ -159,7 +156,6 @@ const WelcomeScreen = ({ navigation }) => {
               style={{
                 color: COLORS.secondary,
                 fontSize: 13,
-                fontFamily: "Poppins-Medium",
               }}
             >
               Privacy Policy

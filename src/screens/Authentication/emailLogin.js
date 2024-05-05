@@ -51,7 +51,6 @@ const EmailLoginScreen = ({ navigation, route }) => {
         titleStyle={{
           fontSize: 18,
           lineHeight: 27,
-          fontFamily: "Poppins-Bold",
         }}
         rightComponent={<View style={{ width: 40, height: 40 }}></View>}
         leftComponent={
@@ -111,7 +110,7 @@ const EmailLoginScreen = ({ navigation, route }) => {
               color: COLORS.white,
               fontSize: 25,
               lineHeight: 40,
-              fontFamily: "Poppins-Bold",
+
               textAlign: "center",
               fontWeight: "bold",
               marginBottom: SIZES.padding * 2,
@@ -125,7 +124,6 @@ const EmailLoginScreen = ({ navigation, route }) => {
           </Text>
           <FormInput
             inputStyle={{
-              fontFamily: "Poppins-Regular",
               // fontStyle: "normal",
               // fontWeight: "700",
               fontSize: 14,
@@ -138,7 +136,6 @@ const EmailLoginScreen = ({ navigation, route }) => {
             }}
             value={email}
             editable={false}
-            keyboardType="name"
             autoCompleteType="name"
             placeholder={""}
             containerStyle={{
@@ -161,7 +158,6 @@ const EmailLoginScreen = ({ navigation, route }) => {
           </Text>
           <FormInput
             inputStyle={{
-              fontFamily: "Poppins-Regular",
               // fontStyle: "normal",
               // fontWeight: "700",
               fontSize: 14,
@@ -174,7 +170,6 @@ const EmailLoginScreen = ({ navigation, route }) => {
               setPassword(value);
             }}
             value={password}
-            keyboardType="name"
             autoCompleteType="name"
             placeholder={""}
             containerStyle={{
@@ -217,7 +212,7 @@ const EmailLoginScreen = ({ navigation, route }) => {
               color: COLORS.lightGray,
               fontSize: 12,
               lineHeight: 24,
-              fontFamily: "Poppins-Medium",
+
               fontWeight: "bold",
               marginBottom: SIZES.padding * 5,
             }}
@@ -247,7 +242,7 @@ const EmailLoginScreen = ({ navigation, route }) => {
               color: COLORS.primary,
               fontSize: 14,
               lineHeight: 21,
-              fontFamily: "Poppins-Regular",
+
               fontWeight: "bold",
             }}
             onPress={() => login({ email, password })}
@@ -266,7 +261,7 @@ const EmailLoginScreen = ({ navigation, route }) => {
                 color: COLORS.lightGray,
                 fontSize: 12,
                 lineHeight: 24,
-                fontFamily: "Poppins-Medium",
+
                 fontWeight: "bold",
               }}
             >
@@ -281,7 +276,7 @@ const EmailLoginScreen = ({ navigation, route }) => {
                 color: COLORS.secondary,
                 fontSize: 12,
                 lineHeight: 24,
-                fontFamily: "Poppins-Medium",
+
                 fontWeight: "bold",
               }}
               onPress={() => {

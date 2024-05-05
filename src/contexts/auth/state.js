@@ -81,7 +81,7 @@ export const AuthState = (props) => {
 
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: res.data
+        payload: res.data,
       });
     } catch (error) {
       const { data, status, _response } = error.response;
@@ -94,7 +94,9 @@ export const AuthState = (props) => {
         type: SIGNUP_FAILED,
         payload: status === 503 ? "server error" : data.message,
       });
-      Alert.alert(`${data.message}`);
+      Alert.alert(
+        `${data.message || "An error occurred! Please try again later"}`
+      );
     }
   };
 
@@ -118,18 +120,19 @@ export const AuthState = (props) => {
         },
       });
     } catch (error) {
-      console.log("error", error.response);
       const { data, status, _response } = error.response;
       if (error.message === "Network Error")
         dispatch({
           type: SIGNUP_FAILED,
           payload: "couldn't login",
         });
-      if (data)
-        dispatch({
-          type: SIGNUP_FAILED,
-          payload: status === 503 ? "server error" : data.message,
-        });
+      dispatch({
+        type: SIGNUP_FAILED,
+        payload: status === 503 ? "server error" : data.message,
+      });
+      Alert.alert(
+        `${data.message || "An error occurred! Please try again later"}`
+      );
     }
   };
 
@@ -137,25 +140,24 @@ export const AuthState = (props) => {
     setSubmitting();
     try {
       const res = await axios.get(`${baseUrl}get-all-languages`);
-      console.log("languages", res.data);
       dispatch({
         type: LANG_SUCCESS,
         payload: res.data.data,
       });
     } catch (error) {
       const { data, status, _response } = error.response;
-      console.log("EROOR", error.response);
       if (error.message === "Network Error")
         dispatch({
           type: LANG_FAILED,
           payload: "couldn't login",
         });
-      if (data)
-        dispatch({
-          type: LANG_FAILED,
-          payload: status === 503 ? "server error" : data.message,
-        });
-      clearLoginMsg();
+      dispatch({
+        type: LANG_FAILED,
+        payload: status === 503 ? "server error" : data.message,
+      });
+      Alert.alert(
+        `${data.message || "An error occurred! Please try again later"}`
+      );
     }
   };
 
