@@ -4,7 +4,7 @@
     "slug": "muta",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/icons/Logo5.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./src/assets/icons/launch.png",
@@ -20,7 +20,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/icons/Logo5.png",
         "backgroundColor": "#1B1E26"
       },
       "icon": "./src/assets/icons/Logo5.png", 
