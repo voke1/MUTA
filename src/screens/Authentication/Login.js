@@ -25,8 +25,6 @@ const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
 
-  const { login } = useContext(AuthContext);
-
   const validateEmail = (input) => {
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return pattern.test(input);
@@ -203,7 +201,7 @@ const LoginScreen = ({ navigation }) => {
             height: SIZES.radius * 2.4,
             justifyContent: "center",
             alignItems: "center",
-            marginBottom: emailError ? null : SIZES.padding,
+            marginBottom: emailError ? 1 : SIZES.padding,
           }}
           inputContainerStyle={{
             backgroundColor: COLORS.primary,
@@ -230,7 +228,7 @@ const LoginScreen = ({ navigation }) => {
             </TouchableOpacity>
           }
         />
-        {emailError ? (
+        {emailError && (
           <Text
             style={{
               color: "red",
@@ -241,7 +239,7 @@ const LoginScreen = ({ navigation }) => {
           >
             {emailError}
           </Text>
-        ) : null}
+        ) }
 
         <TextButton
           // label={label}

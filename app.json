@@ -15,13 +15,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "icon": "./src/assets/icons/Logo5.png"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1B1E26"
       },
+      "icon": "./src/assets/icons/Logo5.png", 
       "package": "com.voke1.muta"
     },
     "web": {
