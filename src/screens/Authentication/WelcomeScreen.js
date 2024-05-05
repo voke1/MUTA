@@ -35,7 +35,7 @@ const WelcomeScreen = ({ navigation }) => {
   const { width, height } = Dimensions.get("window");
 
   return (
-    
+
     <ImageBackground
       source={icons.welcome}
       style={{
@@ -127,7 +127,7 @@ const WelcomeScreen = ({ navigation }) => {
             fontFamily: "Poppins-Regular",
             fontWeight: "bold",
           }}
-          onPress={() => navigation.navigate("spokenLanguage")}
+          onPress={() => navigation.navigate("login")}
         />
         <View
           style={{

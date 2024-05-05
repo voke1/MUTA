@@ -17,6 +17,8 @@ import {
   HomeScreen,
   LiveSessionScreen,
   LearnScreen,
+  LoginScreen,
+  EmailLoginScreen,
 } from "../screens";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -243,6 +245,20 @@ const GeneralStackNavigation = () => {
         <Stack.Screen
           name="emailAuth"
           component={EmailAuth}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="emailLogin"
+          component={EmailLoginScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="login"
+          component={LoginScreen}
           options={{
             headerShown: false,
           }}
