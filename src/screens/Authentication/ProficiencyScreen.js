@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import {
   View,
   Text,
@@ -29,11 +29,12 @@ import {
   LineDivider,
   TextButton,
 } from "../../components";
+import { AuthContext } from "../../contexts/auth/state";
 
 const ProficiencyScreen = ({ navigation }) => {
   const { width, height } = Dimensions.get("window");
-  const [selectedSeek, setSelectedSeek] = React.useState("");
-
+  const [prof, setProf] = React.useState("");
+const {proficiency, setProficiency} = useContext(AuthContext)
   function renderHeader() {
     return (
       <Header
@@ -92,10 +93,10 @@ const ProficiencyScreen = ({ navigation }) => {
           // textAlign: "center",
           paddingHorizontal: SIZES.base * 1.2,
           fontWeight: "bold",
-          marginBottom: SIZES.padding* 3,
+          marginBottom: SIZES.padding * 3,
         }}
       >
-       How would you rate your proficiency in the Language?
+        How would you rate your proficiency in the Language?
       </Text>
 
       <View
@@ -134,8 +135,8 @@ const ProficiencyScreen = ({ navigation }) => {
                   justifyContent: "center",
                   alignItems: "center",
                   borderColor: COLORS.white,
-                  borderWidth: selectedSeek === item.title ? 3 : 1,
-                  marginBottom: SIZES.padding ,
+                  borderWidth: prof === item.title ? 3 : 1,
+                  marginBottom: SIZES.padding,
                   borderRadius: SIZES.base * 1.2,
                   paddingHorizontal: SIZES.padding,
                 }}
@@ -157,7 +158,7 @@ const ProficiencyScreen = ({ navigation }) => {
                   />
                 }
                 rightComponent={
-                  selectedSeek === item.title && (
+                  prof === item.title && (
                     <View
                       style={{
                         width: 40,
@@ -175,7 +176,7 @@ const ProficiencyScreen = ({ navigation }) => {
                   )
                 }
                 onPress={() => {
-                  setSelectedSeek(item.title);
+                  setProf(item.title);
                 }}
               />
             );
@@ -184,14 +185,14 @@ const ProficiencyScreen = ({ navigation }) => {
         <TextButton
           // label={label}
           label={"CONTINUE"}
-          disabled={false}
+          isDisabled={!prof}
           buttonContainerStyle={{
             height: SIZES.radius * 2.4,
             alignItems: "center",
             alignSelf: "flex-end",
             // marginTop: 12,
             borderRadius: SIZES.base * 1.2,
-            backgroundColor: COLORS.secondary,
+            backgroundColor: prof ? COLORS.secondary : `rgba(76, 166, 168, .4)`,
             // marginHorizontal: 40,
             // marginVertical: SIZES.base,
             width: "100%",
@@ -205,7 +206,10 @@ const ProficiencyScreen = ({ navigation }) => {
             fontFamily: "Poppins-Regular",
             fontWeight: "bold",
           }}
-          onPress={() => navigation.navigate("signup")}
+          onPress={() => {
+            setProficiency(prof);
+            navigation.navigate("signup");
+          }}
         />
       </View>
     </SafeAreaView>

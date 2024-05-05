@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Text,
@@ -9,7 +9,9 @@ import {
   StyleSheet,
   Pressable,
   Dimensions,
+  ActivityIndicator,
 } from "react-native";
+import Spinner from "react-native-loading-spinner-overlay";
 
 import { FONTS, SIZES, COLORS, icons, images } from "../../constants";
 import {
@@ -20,21 +22,24 @@ import {
   Header,
   IconButton,
 } from "../../components";
+import { AuthContext } from "../../contexts/auth/state";
 
-const EmailAuth = ({ navigation }) => {
+const EmailAuth = ({ navigation, route }) => {
+  console.log({ route });
   const { width, height } = Dimensions.get("window");
-
+  const [showPass, setShowPass] = React.useState(false);
   const [Fname, SetFname] = useState("");
   const [Lname, SetLname] = useState("");
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(route.params.email);
+  const { isSubmitting, isAuthenticated, signup } = useContext(AuthContext);
 
-  function checkEnabled() {
-    if (Fname && Lname) {
-      return false;
+  useEffect(() => {
+    // dynamically render screen based on role
+    if (isAuthenticated) {
+      navigation.navigate("bottomTabs");
     }
-    return true;
-  }
+  }, [isSubmitting, isAuthenticated]);
 
   function renderHeader() {
     return (
@@ -94,6 +99,17 @@ const EmailAuth = ({ navigation }) => {
         // activeOpacity={1}
       >
         <View style={{ flex: 1 }}>
+          <Spinner
+            visible={isSubmitting}
+            textContent={"Please wait..."}
+            textStyle={{
+              color: "#ffffff",
+              fontFamily: "Raleway_700Bold",
+            }}
+            customIndicator={
+              <ActivityIndicator size="large" color={"#ffffff"} />
+            }
+          />
           <Text
             style={{
               color: COLORS.white,
@@ -125,7 +141,7 @@ const EmailAuth = ({ navigation }) => {
               setEmail(value);
             }}
             value={email}
-            editable={true}
+            editable={false}
             keyboardType="name"
             autoCompleteType="name"
             placeholder={""}
@@ -248,7 +264,7 @@ const EmailAuth = ({ navigation }) => {
               alignItems: "center",
               marginBottom: SIZES.padding,
             }}
-            secureTextEntry={true}
+            secureTextEntry={!showPass}
             inputContainerStyle={{
               backgroundColor: COLORS.primary,
             }}
@@ -259,18 +275,19 @@ const EmailAuth = ({ navigation }) => {
                   alignItems: "flex-end",
                   justifyContent: "center",
                 }}
-                onPress={() => setPassword("")}
+                onPress={() => setShowPass(!showPass)}
               >
-                {password && (
+                {
                   <Image
                     style={{
-                      height: 15,
-                      width: 15,
+                      height: 25,
+                      width: 25,
                       tintColor: COLORS.gray,
                     }}
-                    source={icons.cancel}
+                    resizeMode="contain"
+                    source={icons.hide}
                   />
-                )}
+                }
               </TouchableOpacity>
             }
           />
@@ -278,14 +295,17 @@ const EmailAuth = ({ navigation }) => {
         <TextButton
           // label={label}
           label={"SIGN UP"}
-          disabled={false}
+          isDisabled={!(email && Lname && Fname && password)}
           buttonContainerStyle={{
             height: SIZES.radius * 2.4,
             alignItems: "center",
             alignSelf: "flex-end",
             // marginTop: 12,
             borderRadius: SIZES.base * 1.2,
-            backgroundColor: COLORS.secondary,
+            backgroundColor:
+              email && Lname && Fname && password
+                ? COLORS.secondary
+                : `rgba(76, 166, 168, .4)`,
             // marginHorizontal: 40,
             // marginVertical: SIZES.base,
             width: "100%",
@@ -299,7 +319,15 @@ const EmailAuth = ({ navigation }) => {
             fontFamily: "Poppins-Regular",
             fontWeight: "bold",
           }}
-          onPress={() => navigation.navigate("bottomTabs")}
+          onPress={() => {
+            signup({
+              email,
+              firstName: Fname,
+              lastName: Lname,
+              password,
+              signinType: "password",
+            });
+          }}
         />
 
         <View
@@ -332,6 +360,9 @@ const EmailAuth = ({ navigation }) => {
               lineHeight: 24,
               fontFamily: "Poppins-Medium",
               fontWeight: "bold",
+            }}
+            onPress={() => {
+              navigation.navigate("login");
             }}
           />
         </View>

@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Pressable,
   Dimensions,
+  ActivityIndicator,
 } from "react-native";
 
 import { FONTS, SIZES, COLORS, icons, images } from "../../constants";
@@ -21,20 +22,22 @@ import {
   IconButton,
 } from "../../components";
 import { AuthContext } from "../../contexts/auth/state";
+import Spinner from "react-native-loading-spinner-overlay";
 
-const EmailLoginScreen = ({ navigation }) => {
+const EmailLoginScreen = ({ navigation, route }) => {
   const { width, height } = Dimensions.get("window");
-  const { login } = useContext(AuthContext);
+  const { login, isSubmitting, isAuthenticated } = useContext(AuthContext);
+  const [showPass, setShowPass] = React.useState(false);
 
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(route.params.email);
 
-  function checkEnabled() {
-    if (email && password) {
-      return false;
+  useEffect(() => {
+    // dynamically render screen based on role
+    if (isAuthenticated) {
+      navigation.navigate("bottomTabs");
     }
-    return true;
-  }
+  }, [isSubmitting, isAuthenticated]);
 
   function renderHeader() {
     return (
@@ -82,6 +85,15 @@ const EmailLoginScreen = ({ navigation }) => {
       edges={["top"]}
     >
       {renderHeader()}
+      <Spinner
+        visible={isSubmitting}
+        textContent={"Please wait..."}
+        textStyle={{
+          color: "#ffffff",
+          fontFamily: "Raleway_700Bold",
+        }}
+        customIndicator={<ActivityIndicator size="large" color={"#ffffff"} />}
+      />
       <View
         style={{
           flex: 1,
@@ -125,7 +137,7 @@ const EmailLoginScreen = ({ navigation }) => {
               setEmail(value);
             }}
             value={email}
-            editable={true}
+            editable={false}
             keyboardType="name"
             autoCompleteType="name"
             placeholder={""}
@@ -173,7 +185,7 @@ const EmailLoginScreen = ({ navigation }) => {
               alignItems: "center",
               marginBottom: SIZES.base,
             }}
-            secureTextEntry={true}
+            secureTextEntry={!showPass}
             inputContainerStyle={{
               backgroundColor: COLORS.primary,
             }}
@@ -184,18 +196,19 @@ const EmailLoginScreen = ({ navigation }) => {
                   alignItems: "flex-end",
                   justifyContent: "center",
                 }}
-                onPress={() => setPassword("")}
+                onPress={() => setShowPass(!showPass)}
               >
-                {password && (
+                {
                   <Image
                     style={{
-                      height: 15,
-                      width: 15,
+                      height: 25,
+                      width: 25,
                       tintColor: COLORS.gray,
                     }}
-                    source={icons.cancel}
+                    resizeMode="contain"
+                    source={icons.hide}
                   />
-                )}
+                }
               </TouchableOpacity>
             }
           />
@@ -221,9 +234,8 @@ const EmailLoginScreen = ({ navigation }) => {
               alignItems: "center",
               // marginTop: 12,
               borderRadius: SIZES.base * 1.2,
-              backgroundColor:( email && password)
-                ? COLORS.secondary
-                : `rgba(76, 166, 168, .4)`,
+              backgroundColor:
+                email && password ? COLORS.secondary : `rgba(76, 166, 168, .4)`,
 
               // marginHorizontal: 40,
               // marginVertical: SIZES.base,
@@ -271,6 +283,9 @@ const EmailLoginScreen = ({ navigation }) => {
                 lineHeight: 24,
                 fontFamily: "Poppins-Medium",
                 fontWeight: "bold",
+              }}
+              onPress={() => {
+                navigation.navigate("spokenLanguage");
               }}
             />
           </View>

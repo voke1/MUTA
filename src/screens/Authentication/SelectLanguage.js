@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import {
   SafeAreaView,
   ScrollView,
   ImageBackground,
+  ActivityIndicator,
 } from "react-native";
 
 import {
@@ -35,9 +36,15 @@ import {
   FormInput,
   TextIconLabel,
 } from "../../components";
+import { AuthContext } from "../../contexts/auth/state";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const SelectedLanguage = ({ navigation }) => {
-  const [selectedSeek, setSelectedSeek] = React.useState("");
+  const [lang, setLang] = React.useState("");
+  const { setLangToLearn, learnToLearn } = useContext(AuthContext);
+  const { isSubmitting, getLanguages, languages } = useContext(AuthContext);
+
+  useEffect(() => getLanguages(), []);
 
   function renderHeader() {
     return (
@@ -84,6 +91,16 @@ const SelectedLanguage = ({ navigation }) => {
     >
       {renderHeader()}
 
+      <Spinner
+        visible={isSubmitting}
+        textContent={"Please wait..."}
+        textStyle={{
+          color: "#ffffff",
+          fontFamily: "Raleway_700Bold",
+        }}
+        customIndicator={<ActivityIndicator size="large" color={"#ffffff"} />}
+      />
+
       <Text
         style={{
           // fontWeight: "bold",
@@ -126,10 +143,10 @@ const SelectedLanguage = ({ navigation }) => {
             marginBottom: SIZES.base * 2,
           }}
         >
-          {dummyData.spokenLanguage.map((item, index) => {
+          {languages.map((item, index) => {
             return (
               <TouchableOpacity
-                key={item.id.toString()} // Use index as the unique key
+                key={item.language_id.toString()} // Use index as the unique key
                 style={{
                   justifyContent: "center",
                   padding: SIZES.base,
@@ -138,61 +155,76 @@ const SelectedLanguage = ({ navigation }) => {
                   width: SIZES.padding * 8,
                   margin: SIZES.base * 0.5,
                   borderColor:
-                    selectedSeek === item.title
+                    lang === item.language_id
                       ? COLORS.secondary
                       : COLORS.lightGray,
-                  borderWidth: selectedSeek === item.title ? 2 : 1,
+                  borderWidth: lang === item.title ? 3 : 1,
                 }}
                 onPress={() => {
-                  setSelectedSeek(item.title);
+                  setLang(item.language_id);
                 }}
               >
                 <Image
-                  source={item.icon}
+                  source={{ uri: item.languageIcon }}
                   style={{
                     alignSelf: "center",
                     width: 50,
                     height: 50,
-                    tintColor:
-                      selectedSeek === item.title
-                        ? COLORS.secondary
-                        : COLORS.lightGray,
                   }}
                   resizeMode="contain"
                 />
-                <Text style={styles.giftTitle}>{item.title}</Text>
+                <Text
+                  style={[
+                    styles.giftTitle,
+                    {
+                      color:
+                        lang === item.language_id
+                          ? COLORS.secondary
+                          : COLORS.lightGray,
+                    },
+                  ]}
+                >
+                  {item.languageName}
+                </Text>
               </TouchableOpacity>
             );
           })}
         </View>
 
-        <TextButton
-          // label={label}
-          label={"CONTINUE"}
-          disabled={false}
-          buttonContainerStyle={{
-            height: SIZES.radius * 2.4,
-            alignItems: "center",
-            alignSelf: "flex-end",
-            // marginTop: 12,
-            borderRadius: SIZES.base * 1.2,
-            backgroundColor: COLORS.secondary,
-            // marginHorizontal: 40,
-            // marginVertical: SIZES.base,
-            width: "100%",
-            borderWidth: 2,
-            borderColor: COLORS.lightGray,
-            marginBottom: SIZES.padding,
-          }}
-          labelStyle={{
-            color: COLORS.primary,
-            fontSize: 14,
-            lineHeight: 21,
-            fontFamily: "Poppins-Regular",
-            fontWeight: "bold",
-          }}
-          onPress={() => navigation.navigate("proficiency")}
-        />
+        {languages.length > 1 && (
+          <TextButton
+            // label={label}
+            label={"CONTINUE"}
+            isDisabled={!lang}
+            buttonContainerStyle={{
+              height: SIZES.radius * 2.4,
+              alignItems: "center",
+              alignSelf: "flex-end",
+              // marginTop: 12,
+              borderRadius: SIZES.base * 1.2,
+              backgroundColor: lang
+                ? COLORS.secondary
+                : `rgba(76, 166, 168, .4)`,
+              // marginHorizontal: 40,
+              // marginVertical: SIZES.base,
+              width: "100%",
+              borderWidth: 2,
+              borderColor: COLORS.lightGray,
+              marginBottom: SIZES.padding,
+            }}
+            labelStyle={{
+              color: COLORS.primary,
+              fontSize: 14,
+              lineHeight: 21,
+              fontFamily: "Poppins-Regular",
+              fontWeight: "bold",
+            }}
+            onPress={() => {
+              setLangToLearn(lang);
+              navigation.navigate("proficiency");
+            }}
+          />
+        )}
       </ScrollView>
     </SafeAreaView>
   );

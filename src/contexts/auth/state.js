@@ -12,6 +12,11 @@ import {
   GET_LANG_FAILED,
   GET_LANG_LOADING,
   GET_LANG_SUCCESS,
+  SPOKEN_LANG,
+  LANG_TO_LEARN,
+  PROFICIENCY,
+  LANG_SUCCESS,
+  LANG_FAILED,
 } from "./action";
 import axios from "axios";
 import { baseUrl } from "../../constants/url";
@@ -39,6 +44,27 @@ export const AuthState = (props) => {
     });
   };
 
+  const setSpokenLang = (value) => {
+    dispatch({
+      type: SPOKEN_LANG,
+      payload: value,
+    });
+  };
+
+  const setProficiency = (value) => {
+    dispatch({
+      type: PROFICIENCY,
+      payload: value,
+    });
+  };
+
+  const setLangToLearn = (value) => {
+    dispatch({
+      type: LANG_TO_LEARN,
+      payload: value,
+    });
+  };
+
   const clearLoginMsg = () => {
     setTimeout(() => {
       dispatch({
@@ -49,67 +75,51 @@ export const AuthState = (props) => {
 
   // Action to log in
   const login = async (values) => {
-    console.log({ values });
     setSubmitting();
     try {
       const res = await axios.post(`${baseUrl}login`, values);
+
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: {
-          token,
-          user: {
-            name,
-            vehicleNumber: vehicleNumber ? vehicleNumber : "",
-            siteId,
-            site,
-            imageUrl,
-            id,
-            country: country && country.toLowerCase(),
-          },
-        },
+        payload: res.data
       });
     } catch (error) {
-      const { data, status } = error.response;
+      const { data, status, _response } = error.response;
+      if (error.message === "Network Error")
+        dispatch({
+          type: SIGNUP_FAILED,
+          payload: "couldn't login",
+        });
+      dispatch({
+        type: SIGNUP_FAILED,
+        payload: status === 503 ? "server error" : data.message,
+      });
       Alert.alert(`${data.message}`);
     }
   };
 
   // Action to log in
   const signup = async (values) => {
-    dispatch({
-      type: SIGNUP_LOADING,
-    });
+    setSubmitting();
     try {
-      const res = await axios.post(`${baseUrl}create-user`, values);
-      const {
-        roles,
-        name,
-        token,
-        vehicleNumber,
-        siteId,
-        imageUrl,
-        deviceId,
-        country,
-        id,
-        site,
-      } = res.data;
+      const res = await axios.post(`${baseUrl}create-user`, {
+        ...values,
+        userType: state.proficiency,
+        spokenLanguage: state.langToLearn,
+      });
+      console.log("rESULT", res.data);
+      const { token, refreshToken, userData } = res.data;
       dispatch({
         type: SIGNUP_SUCCESS,
         payload: {
           token,
-          user: {
-            name,
-            vehicleNumber: vehicleNumber ? vehicleNumber : "",
-            siteId,
-            site,
-            imageUrl,
-            id,
-            country: country && country.toLowerCase(),
-          },
+          refreshToken,
+          userData,
         },
       });
     } catch (error) {
-      const { data, status } = error.response;
+      console.log("error", error.response);
+      const { data, status, _response } = error.response;
       if (error.message === "Network Error")
         dispatch({
           type: SIGNUP_FAILED,
@@ -120,30 +130,29 @@ export const AuthState = (props) => {
           type: SIGNUP_FAILED,
           payload: status === 503 ? "server error" : data.message,
         });
-      clearLoginMsg();
     }
   };
 
   const getLanguages = async () => {
-    dispatch({
-      type: GET_LANG_LOADING,
-    });
+    setSubmitting();
     try {
-      const res = await axios.post(`${baseUrl}get-all-languages`);
+      const res = await axios.get(`${baseUrl}get-all-languages`);
+      console.log("languages", res.data);
       dispatch({
-        type: GET_LANG_SUCCESS,
-        payload: res.data,
+        type: LANG_SUCCESS,
+        payload: res.data.data,
       });
     } catch (error) {
-      const { data, status } = error.response;
+      const { data, status, _response } = error.response;
+      console.log("EROOR", error.response);
       if (error.message === "Network Error")
         dispatch({
-          type: GET_LANG_FAILED,
+          type: LANG_FAILED,
           payload: "couldn't login",
         });
       if (data)
         dispatch({
-          type: GET_LANG_FAILED,
+          type: LANG_FAILED,
           payload: status === 503 ? "server error" : data.message,
         });
       clearLoginMsg();
@@ -162,6 +171,9 @@ export const AuthState = (props) => {
         logOut,
         getLanguages,
         signup,
+        setProficiency,
+        setLangToLearn,
+        setSpokenLang,
       }}
     >
       {props.children}

@@ -16,13 +16,19 @@ import {
   Header,
   IconButton,
   TextIconButton,
-  FormInput
+  FormInput,
 } from "../../components";
 import { COLORS, icons, images, SIZES } from "../../constants";
 
 const Signup = ({ navigation }) => {
   const { width, height } = Dimensions.get("window");
-  const [email, setEmail] = useState("")
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+  const validateEmail = (input) => {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(input);
+  };
 
   function renderHeader() {
     return (
@@ -81,7 +87,6 @@ const Signup = ({ navigation }) => {
         >
           Sign up and start learning right away!
         </Text>
-
         <TextIconButton
           label="SIGN UP WITH GOOGLE"
           iconPosition="LEFT"
@@ -108,7 +113,6 @@ const Signup = ({ navigation }) => {
           }}
           onPress={() => console.log("PRESSED")}
         />
-
         <TextIconButton
           label="SIGN UP WITH FACEBOOK"
           iconPosition="LEFT"
@@ -135,7 +139,6 @@ const Signup = ({ navigation }) => {
           }}
           onPress={() => console.log("PRESSED")}
         />
-
         <View
           style={{
             marginHorizontal: SIZES.base,
@@ -187,6 +190,11 @@ const Signup = ({ navigation }) => {
           onChange={(value) => {
             //validate email
             setEmail(value);
+            if (validateEmail(value)) {
+              setEmailError(""); // Clear error message if email is valid
+            } else {
+              setEmailError("Please enter a valid email address");
+            }
           }}
           placeholder="Enter email address"
           containerStyle={{
@@ -195,7 +203,7 @@ const Signup = ({ navigation }) => {
             height: SIZES.radius * 2.4,
             justifyContent: "center",
             alignItems: "center",
-            marginBottom: SIZES.padding,
+            marginBottom: emailError ? null : SIZES.padding,
           }}
           inputContainerStyle={{
             backgroundColor: COLORS.primary,
@@ -205,18 +213,32 @@ const Signup = ({ navigation }) => {
             //   borderRadius: SIZES.radius * 3,
           }}
         />
+        {emailError ? (
+          <Text
+            style={{
+              color: "red",
+              fontSize: 12,
+              marginBottom: SIZES.padding,
+              fontWeight: "bold",
+            }}
+          >
+            {emailError}
+          </Text>
+        ) : null}
 
         <TextButton
           // label={label}
           label={"SIGN UP WITH EMAIL"}
-          disabled={false}
+          isDisabled={emailError}
           buttonContainerStyle={{
             height: SIZES.radius * 2.4,
             alignItems: "center",
             alignSelf: "flex-end",
             // marginTop: 12,
             borderRadius: SIZES.base * 1.2,
-            backgroundColor: COLORS.secondary,
+            backgroundColor: !emailError
+              ? COLORS.secondary
+              : `rgba(76, 166, 168, .4)`,
             // marginHorizontal: 40,
             // marginVertical: SIZES.base,
             width: "100%",
@@ -230,9 +252,10 @@ const Signup = ({ navigation }) => {
             fontFamily: "Poppins-Regular",
             fontWeight: "bold",
           }}
-          onPress={() => navigation.navigate("emailAuth")}
+          onPress={() => {
+            navigation.navigate("emailAuth", { email });
+          }}
         />
-
         <View
           style={{
             flexDirection: "row",
@@ -262,6 +285,9 @@ const Signup = ({ navigation }) => {
               lineHeight: 24,
               fontFamily: "Poppins-Medium",
               fontWeight: "bold",
+            }}
+            onPress={() => {
+              navigation.navigate("login");
             }}
           />
         </View>

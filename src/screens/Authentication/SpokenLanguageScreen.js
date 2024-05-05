@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -29,10 +29,12 @@ import {
   LineDivider,
   TextButton,
 } from "../../components";
+import { AuthContext } from "../../contexts/auth/state";
 
 const SpokenLanguageScreen = ({ navigation }) => {
   const { width, height } = Dimensions.get("window");
-  const [selectedSeek, setSelectedSeek] = React.useState("");
+  const [lang, setLang] = React.useState("");
+  const { setSpokenLang, spokenLanguage } = useContext(AuthContext);
 
   function renderHeader() {
     return (
@@ -101,12 +103,12 @@ const SpokenLanguageScreen = ({ navigation }) => {
                 justifyContent: "center",
               }}
               containerStyle={{
-                height: SIZES.padding* 3,
+                height: SIZES.padding * 3,
                 // backgroundColor: COLORS.lightPrimary,
                 justifyContent: "center",
                 alignItems: "center",
                 borderColor: COLORS.white,
-                borderWidth: selectedSeek === item.title ? 3 : 1,
+                borderWidth: lang === item.title ? 3 : 1,
                 marginBottom: SIZES.padding * 2,
                 borderRadius: SIZES.base * 1.2,
                 paddingHorizontal: SIZES.padding,
@@ -129,7 +131,7 @@ const SpokenLanguageScreen = ({ navigation }) => {
                 />
               }
               rightComponent={
-                selectedSeek === item.title && (
+                lang === item.title && (
                   <View
                     style={{
                       width: 40,
@@ -147,7 +149,7 @@ const SpokenLanguageScreen = ({ navigation }) => {
                 )
               }
               onPress={() => {
-                setSelectedSeek(item.title);
+                setLang(item.title);
               }}
             />
           );
@@ -156,14 +158,14 @@ const SpokenLanguageScreen = ({ navigation }) => {
         <TextButton
           // label={label}
           label={"CONTINUE"}
-          disabled={false}
+          isDisabled={!lang}
           buttonContainerStyle={{
             height: SIZES.radius * 2.4,
             alignItems: "center",
             alignSelf: "flex-end",
             // marginTop: 12,
             borderRadius: SIZES.base * 1.2,
-            backgroundColor: COLORS.secondary,
+            backgroundColor: lang ? COLORS.secondary : `rgba(76, 166, 168, .4)`,
             // marginHorizontal: 40,
             // marginVertical: SIZES.base,
             width: "100%",
@@ -177,7 +179,10 @@ const SpokenLanguageScreen = ({ navigation }) => {
             fontFamily: "Poppins-Regular",
             fontWeight: "bold",
           }}
-          onPress={() => navigation.navigate("selectedLanguage")}
+          onPress={() => {
+            setSpokenLang(lang);
+            navigation.navigate("selectedLanguage");
+          }}
         />
       </View>
     </SafeAreaView>

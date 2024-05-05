@@ -23,8 +23,14 @@ import { AuthContext } from "../../contexts/auth/state";
 const LoginScreen = ({ navigation }) => {
   const { width, height } = Dimensions.get("window");
   const [email, setEmail] = useState("");
-  const {login} = useContext(AuthContext)
+  const [emailError, setEmailError] = useState("");
 
+  const { login } = useContext(AuthContext);
+
+  const validateEmail = (input) => {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(input);
+  };
   function renderHeader() {
     return (
       <Header
@@ -184,6 +190,11 @@ const LoginScreen = ({ navigation }) => {
           onChange={(value) => {
             //validate email
             setEmail(value);
+            if (validateEmail(value)) {
+              setEmailError(""); // Clear error message if email is valid
+            } else {
+              setEmailError("Please enter a valid email address");
+            }
           }}
           value={email}
           keyboardType="name"
@@ -195,7 +206,7 @@ const LoginScreen = ({ navigation }) => {
             height: SIZES.radius * 2.4,
             justifyContent: "center",
             alignItems: "center",
-            marginBottom: SIZES.padding,
+            marginBottom: emailError ? null : SIZES.padding,
           }}
           inputContainerStyle={{
             backgroundColor: COLORS.primary,
@@ -222,18 +233,32 @@ const LoginScreen = ({ navigation }) => {
             </TouchableOpacity>
           }
         />
+        {emailError ? (
+          <Text
+            style={{
+              color: "red",
+              fontSize: 12,
+              marginBottom: SIZES.padding,
+              fontWeight: "bold",
+            }}
+          >
+            {emailError}
+          </Text>
+        ) : null}
 
         <TextButton
           // label={label}
           label={"LOG IN WITH EMAIL"}
-          isDisabled={!email}
+          isDisabled={emailError}
           buttonContainerStyle={{
             height: SIZES.radius * 2.4,
             alignItems: "center",
             alignSelf: "flex-end",
             // marginTop: 12,
             borderRadius: SIZES.base * 1.2,
-            backgroundColor: email ? COLORS.secondary : `rgba(76, 166, 168, .4)`,
+            backgroundColor: email
+              ? COLORS.secondary
+              : `rgba(76, 166, 168, .4)`,
             // marginHorizontal: 40,
             // marginVertical: SIZES.base,
             width: "100%",
@@ -247,7 +272,7 @@ const LoginScreen = ({ navigation }) => {
             fontFamily: "Poppins-Regular",
             fontWeight: "bold",
           }}
-          onPress={() => navigation.navigate("emailLogin")}
+          onPress={() => navigation.navigate("emailLogin", { email })}
         />
 
         <View
@@ -279,6 +304,9 @@ const LoginScreen = ({ navigation }) => {
               lineHeight: 24,
               fontFamily: "Poppins-Medium",
               fontWeight: "bold",
+            }}
+            onPress={() => {
+              navigation.navigate("spokenLanguage");
             }}
           />
         </View>
