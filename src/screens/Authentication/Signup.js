@@ -226,14 +226,14 @@ const Signup = ({ navigation }) => {
         <TextButton
           // label={label}
           label={"SIGN UP WITH EMAIL"}
-          isDisabled={emailError}
+          isDisabled={!email || emailError}
           buttonContainerStyle={{
             height: SIZES.radius * 2.4,
             alignItems: "center",
             alignSelf: "flex-end",
             // marginTop: 12,
             borderRadius: SIZES.base * 1.2,
-            backgroundColor: !emailError
+            backgroundColor: email
               ? COLORS.secondary
               : `rgba(76, 166, 168, .4)`,
             // marginHorizontal: 40,
@@ -250,7 +250,9 @@ const Signup = ({ navigation }) => {
             fontWeight: "bold",
           }}
           onPress={() => {
-            navigation.navigate("emailAuth", { email });
+            if (!emailError && email) {
+              navigation.navigate("emailAuth", { email });
+            }
           }}
         />
         <View

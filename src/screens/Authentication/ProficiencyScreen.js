@@ -95,7 +95,7 @@ const ProficiencyScreen = ({ navigation, route }) => {
           marginBottom: SIZES.padding * 3,
         }}
       >
-       {`How would you rate your proficiency in ${route.params.name}?`}
+        {`How would you rate your proficiency in ${route.params.name}?`}
       </Text>
 
       <View
@@ -196,12 +196,12 @@ const ProficiencyScreen = ({ navigation, route }) => {
             width: "100%",
             borderWidth: 2,
             borderColor: COLORS.lightGray,
+            marginBottom: SIZES.padding,
           }}
           labelStyle={{
             color: COLORS.primary,
             fontSize: 14,
             lineHeight: 21,
-
             fontWeight: "bold",
           }}
           onPress={() => {
